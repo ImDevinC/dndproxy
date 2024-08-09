@@ -36,6 +36,9 @@ func main() {
 	router := http.NewServeMux()
 
 	router.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With")
 		characterID := r.URL.Query().Get("character")
 		if len(characterID) == 0 {
 			w.WriteHeader(http.StatusBadRequest)
